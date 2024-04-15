@@ -1,34 +1,21 @@
-#!/bin/bash
+#!/bin/sh
 
-echo "[*] Implementing slave replication"
-echo "[*] Host : $HOST_SLAVE1"
-echo "[*] Waiting 20s for containers to be up and running..."
-sleep 20
-echo
+# load env file into the script's environment.
+source env/master.sh
+source env/slave1.sh
+source env/user.sh
 
 # Get the log position and name from master
 result=$(docker exec $(docker ps -q -f name=$HOST_MASTER) mysql -u root --password=$MASTER_ROOT_PASSWORD --port=$PORT_MASTER --execute="show master status;")
 log=$(echo $result|awk '{print $6}')
 position=$(echo $result|awk '{print $5}')
 
-echo "Result master status : $result"
-echo
-
-# Connect slave to master.
 docker exec $(docker ps -q -f name=$HOST_SLAVE1) \
 		mysql -u root --password=$SLAVE1_ROOT_PASSWORD --port=$PORT_SLAVE1 \
-		--execute="SET GLOBAL time_zone = '$TIMEZONE';\
+		--execute="
 
 		STOP SLAVE;\
 		RESET SLAVE;\
-
-		CREATE USER IF NOT EXISTS '$USER_MONITOR_USERNAME'@'%' identified by '$USER_MONITOR_PASSWORD';\
-		GRANT ALL PRIVILEGES ON *.* TO '$USER_MONITOR_USERNAME'@'%' WITH GRANT OPTION;\
-
-		CREATE USER IF NOT EXISTS '$USER_SUPER_USERNAME'@'%' identified by '$USER_SUPER_PASSWORD';\
-		GRANT ALL PRIVILEGES ON *.* TO '$USER_SUPER_USERNAME'@'%';\
-
-		FLUSH PRIVILEGES;\
 
 		CHANGE MASTER TO\
       MASTER_HOST='$HOST_MASTER',\
@@ -46,5 +33,5 @@ docker exec $(docker ps -q -f name=$HOST_SLAVE1) \
 		SHOW SLAVE STATUS\G;"
 
 echo
-echo ===[ $HOST_SLAVE1 is running on port $PORT_SLAVE1 ]===
+echo ===[ $HOST_SLAVE1 resync complete ]===
 echo

@@ -1,16 +1,5 @@
 #!/bin/bash
 
-# load env file into the script's environment.
-source env/master.sh
-source env/user.sh
-
-echo
-echo Starting deploying master...
-echo
-
-cd ../
-docker compose -f docker-compose.master.yaml up -d --force-recreate --build
-
 echo "[*] Implementing master replication"
 echo "[*] Host : $HOST_MASTER"
 echo "[*] Waiting 20s for containers to be up and running"

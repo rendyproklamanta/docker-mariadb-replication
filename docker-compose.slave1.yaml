@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
 
-  mysql-slave1:
+  mariadb-slave1:
     image: mariadb:lts
     volumes:
       - ./data/slave1:/var/lib/mysql

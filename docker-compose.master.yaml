@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
 
-  mysql-master:
+  mariadb-master:
     image: mariadb:lts
     volumes:
       - ./data/master:/var/lib/mysql
@@ -15,23 +15,6 @@ services:
       - 3301:3301
     networks:
       - bridge
-
-  # mysql-cron-backup:
-  #   image: fradelg/mysql-cron-backup
-  #   depends_on:
-  #     - mysql-master
-  #   volumes:
-  #     - ./data/backup:/backup
-  #   environment:
-  #     - TZ=Asia/Jakarta
-  #     - MYSQL_HOST=mysql-master
-  #     - MYSQL_USER=root
-  #     - MYSQL_PASS=${MASTER_ROOT_PASSWORD}
-  #     - MAX_BACKUPS=4
-  #     - INIT_BACKUP=0
-  #     - CRON_TIME=0 */6 * * *
-  #   networks:
-  #     - bridge
       
 networks:
   bridge:

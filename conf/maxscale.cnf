@@ -14,13 +14,13 @@ admin_secure_gui  = false
 ########################
 [server1]
 type              = server
-address           = mysql-master
+address           = mariadb-master
 port              = 3301
 protocol          = MariaDBBackend
 
 [server2]
 type              = server
-address           = mysql-slave1
+address           = mariadb-slave1
 port              = 3302
 protocol          = MariaDBBackend
 
@@ -43,14 +43,6 @@ enforce_read_only_slaves = 1
 #########################
 # Service definitions for read/write splitting and read-only services.
 #########################
-[Read-Only-Service]
-type              = service
-router            = readconnroute
-servers           = server1,server2
-user              = maxuser
-password          = maxpwd
-router_options    = slave
-
 [Read-Write-Service]
 type              = service
 router            = readwritesplit
@@ -62,12 +54,6 @@ password          = maxpwd
 # Listener definitions for the service
 # Listeners represent the ports the service will listen on.
 ##########################
-[Read-Only-Listener]
-type              = listener
-service           = Read-Only-Service
-protocol          = MariaDBClient
-port              = 6030
-
 [Read-Write-Listener]
 type              = listener
 service           = Read-Write-Service
