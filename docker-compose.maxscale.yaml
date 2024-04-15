@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+
+  maxscale:
+    image: mariadb/maxscale:latest
+    container_name: maxscale
+    volumes:
+      - ./conf/maxscale.cnf:/etc/maxscale.cnf
+    ports:
+      - 6030:6030
+      - 6033:6033
+      - 8989:8989
+      - 2812:2812
+    networks:
+      - bridge
+
+networks:
+  bridge:
+    driver: bridge
