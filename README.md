@@ -1,7 +1,16 @@
+## MariaDB replication using MaxScale
+<hr>
+
 ### Stacks:
 - MariaDB 10.x
 - Docker
 - Maxscale
+
+### Servers
+> If one server's down, just run it again. it'll automatically sync the replication GTID
+- Master
+- Slave
+
 
 ### Steps
 - create dir
@@ -49,49 +58,46 @@ sudo journalctl -u mariadb-repl.service
 ### Access :
 - Access database using PMA
 ```
-Link : http://localhost:8000 or http://[YOUR_IP_ADDRESS]:[PORT]
+Link : http://localhost:8000 or http://[YOUR_IP_ADDRESS]:8000
 user : super_usr
 pass : SUPER_PASSWORD_SET
 ```
 
-- Access database using remote app like navicat, etc..
+- Access using MySql client, like navicat, etc..
 ```
 host : maxscale or [YOUR_IP_ADDRESS]
 user : super_usr
 pass : SUPER_PASSWORD_SET
-port : 6033
+port : 6033 (proxy) | 3301 (master) | 3302 (slave)
 ```
 
 - Access MaxScale web UI
 ```
-Link : http://localhost:8989 or http://[YOUR_IP_ADDRESS]:[8989]
+Link : http://localhost:8989 or http://[YOUR_IP_ADDRESS]:8989
 user : admin
 pass : mariadb
 ```
 
 ### Note :
-- If GTID not sync between servers
+- If server down
 ```
-> Execute start.sh again : 
+* Execute start.sh again : 
 -- linux : ./start.sh
 -- windows : ./start-non-swarm.sh
 
-> Check if tables not sync beetwen servers :
+* Check if 1 or more database not sync beetwen servers :
 -- Login to mysqlclient : maxscale server
 -- Run Query Lock : FLUSH TABLES WITH READ LOCK;
--- Dump database {dbname}
+-- Export database {dbname}
 -- Import database {dbname} to {dbname_new}
--- Rename {dbname_new} to {dbname} 
+-- Delete old database {dbname}
+-- Rename {dbname_new} to {dbname}
 -- Run Query Unlock : UNLOCK TABLES;
 -- Check if all tables synced up
 ```
 
-> If GTID not sync beetwen servers :
--- Login to mysqlclient : maxscale server
--- Run Query Lock : FLUSH TABLES WITH READ LOCK;
--- Dump database {dbname}
--- Import database {dbname} to {dbname_new}
--- Rename {dbname_new} to {dbname} 
--- Run Query Unlock : UNLOCK TABLES;
--- Check if all tables synced up
+- If GTID not sync beetwen servers :
+```
+cd resync
+./slave1.sh
 ```
