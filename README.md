@@ -11,7 +11,6 @@
 - Master
 - Slave
 
-
 ### Steps
 - create dir
 ```
@@ -41,8 +40,8 @@ chmod +x start.sh
 On Linux
 ./start.sh
 
-On Windows
-./dev.sh
+On Windows OR non docker-swarm
+./start.non-swarm.sh
 ```
 
 - Enable auto start on reboot and re-sync mariadb :
@@ -92,7 +91,7 @@ pass : mariadb
 -- Import database {dbname} to {dbname_new}
 -- Delete old database {dbname}
 -- Rename {dbname_new} to {dbname}
--- Run Query Unlock : UNLOCK TABLES;
+-- Run query unlock : UNLOCK TABLES;
 -- Check if all tables synced up
 ```
 

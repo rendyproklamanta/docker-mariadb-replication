@@ -22,12 +22,6 @@ docker exec $(docker ps -q -f name=$HOST_SLAVE1) \
 		STOP SLAVE;\
 		RESET SLAVE;\
 
-		CREATE USER IF NOT EXISTS '$USER_MONITOR_USERNAME'@'%' identified by '$USER_MONITOR_PASSWORD';\
-		GRANT ALL PRIVILEGES ON *.* TO '$USER_MONITOR_USERNAME'@'%' WITH GRANT OPTION;\
-
-		CREATE USER IF NOT EXISTS '$USER_SUPER_USERNAME'@'%' identified by '$USER_SUPER_PASSWORD';\
-		GRANT ALL PRIVILEGES ON *.* TO '$USER_SUPER_USERNAME'@'%';\
-
 		FLUSH PRIVILEGES;\
 
 		CHANGE MASTER TO\
@@ -48,3 +42,5 @@ docker exec $(docker ps -q -f name=$HOST_SLAVE1) \
 echo
 echo ===[ $HOST_SLAVE1 is running on port $PORT_SLAVE1 ]===
 echo
+
+chmod +x user/user.slave1.sh && ./user/user.slave1.sh
