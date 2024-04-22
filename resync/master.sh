@@ -1,10 +1,5 @@
 #!/bin/sh
 
-# load env file into the script's environment.
-source ../env/master.sh
-source ../env/slave1.sh
-source ../env/user.sh
-
 # Get the log position and name from master
 result=$(docker exec $(docker ps -q -f name=$HOST_SLAVE1) mysql -u root --password=$SLAVE1_ROOT_PASSWORD --port=$PORT_SLAVE1 --execute="show master status;")
 log=$(echo $result|awk '{print $6}')

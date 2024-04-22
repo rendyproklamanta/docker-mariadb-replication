@@ -95,8 +95,8 @@ pass : mariadb
 -- Check if all tables synced up
 ```
 
-- If GTID not sync beetwen servers :
+- If GTID not sync between servers :
 ```
 cd resync
-./slave1.sh
+chmod +x main.sh && ./main.sh
 ```
