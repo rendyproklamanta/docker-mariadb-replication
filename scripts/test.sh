@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # load env file into the script's environment.
 source env/master.sh
 source env/slave1.sh

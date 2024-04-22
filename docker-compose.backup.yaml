@@ -16,8 +16,8 @@ services:
       - INIT_BACKUP=0
       - CRON_TIME=0 */6 * * *
     networks:
-      - bridge
-      
+      - mysql-network
+
 networks:
-  bridge:
-    driver: bridge
+  mysql-network:
+    external: true

@@ -14,8 +14,8 @@ services:
       - MEMORY_LIMIT=500M
       - MAX_EXECUTION_TIME=1000
     networks:
-      - bridge
+      - mysql-network
 
 networks:
-  bridge:
-    driver: bridge
+  mysql-network:
+    external: true

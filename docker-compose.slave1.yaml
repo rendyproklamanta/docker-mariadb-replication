@@ -14,8 +14,8 @@ services:
     ports:
       - 3302:3302
     networks:
-      - bridge
+      - mysql-network
 
 networks:
-  bridge:
-    driver: bridge
+  mysql-network:
+    external: true

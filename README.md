@@ -30,6 +30,19 @@ find -type f -exec sed -i 's/MASTER_ROOT_PASSWORD_SET/YOUR_PASSWORD/g' {} +
 find -type f -exec sed -i 's/SLAVE1_ROOT_PASSWORD_SET/YOUR_PASSWORD/g' {} +
 find -type f -exec sed -i 's/SUPER_PASSWORD_SET/YOUR_PASSWORD/g' {} +
 ```
+- Adding port to firewall
+```
+ufw allow 3306
+ufw allow 6033
+ufw allow 3301
+ufw allow 3302
+ufw allow 8989
+```
+
+- Create network
+```
+docker network create --driver overlay mysql-network
+```
 
 - Set permission if using linux
 ```

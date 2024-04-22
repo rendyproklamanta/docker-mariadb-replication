@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Get the log position and name from master
 result=$(docker exec $(docker ps -q -f name=$HOST_MASTER) mysql -u root --password=$MASTER_ROOT_PASSWORD --port=$PORT_MASTER --execute="show master status;")
