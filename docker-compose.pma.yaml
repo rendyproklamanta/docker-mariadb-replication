@@ -14,8 +14,8 @@ services:
       - MEMORY_LIMIT=500M
       - MAX_EXECUTION_TIME=1000
     networks:
-      - mysql-network
+      - mariadb-network
 
 networks:
-  mysql-network:
+  mariadb-network:
     external: true

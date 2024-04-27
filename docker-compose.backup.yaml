@@ -16,8 +16,8 @@ services:
       - INIT_BACKUP=0
       - CRON_TIME=0 */6 * * *
     networks:
-      - mysql-network
+      - mariadb-network
 
 networks:
-  mysql-network:
+  mariadb-network:
     external: true
