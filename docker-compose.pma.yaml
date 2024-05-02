@@ -8,7 +8,7 @@ services:
       - 8000:80
     environment:
       - TZ=Asia/Jakarta
-      - PMA_HOST=maxscale
+      - PMA_HOST=mariadb_maxscale
       - PMA_PORT=6033
       - UPLOAD_LIMIT=2G
       - MEMORY_LIMIT=500M

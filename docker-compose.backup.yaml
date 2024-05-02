@@ -9,7 +9,7 @@ services:
     environment:
       - TZ=Asia/Jakarta
       - MYSQL_PORT=6033
-      - MYSQL_HOST=maxscale
+      - MYSQL_HOST=mariadb_maxscale
       - MYSQL_USER=super_usr
       - MYSQL_PASS=${USER_SUPER_PASSWORD}
       - MAX_BACKUPS=4
