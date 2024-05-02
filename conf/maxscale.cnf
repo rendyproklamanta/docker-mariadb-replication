@@ -14,13 +14,13 @@ admin_secure_gui  = false
 ########################
 [server1]
 type              = server
-address           = mariadb-master
+address           = mariadb_mariadb-master
 port              = 3301
 protocol          = MariaDBBackend
 
 [server2]
 type              = server
-address           = mariadb-slave1
+address           = mariadb_mariadb-slave1
 port              = 3302
 protocol          = MariaDBBackend
 
