@@ -2,8 +2,8 @@
 
 echo "[*] Implementing slave replication"
 echo "[*] Host : $HOST_SLAVE1"
-echo "[*] Waiting 20s for containers to be up and running..."
-sleep 20
+echo "[*] Waiting 30s for containers to be up and running..."
+sleep 30
 echo
 
 # Get the log position and name from master

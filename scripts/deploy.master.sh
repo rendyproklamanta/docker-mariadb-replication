@@ -2,8 +2,8 @@
 
 echo "[*] Implementing master replication"
 echo "[*] Host : $HOST_MASTER"
-echo "[*] Waiting 20s for containers to be up and running"
-sleep 20
+echo "[*] Waiting 30s for containers to be up and running"
+sleep 30
 echo
 
 # Create user on master database.
