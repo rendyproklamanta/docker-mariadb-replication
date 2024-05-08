@@ -1,7 +1,6 @@
-version: '3.9'
+version: "3.9"
 
 services:
-
   pma:
     image: phpmyadmin/phpmyadmin
     ports:
@@ -14,8 +13,8 @@ services:
       - MEMORY_LIMIT=500M
       - MAX_EXECUTION_TIME=1000
     networks:
-      - mariadb-network
+      - mysql-network
 
 networks:
-  mariadb-network:
+  mysql-network:
     external: true

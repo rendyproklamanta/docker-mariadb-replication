@@ -1,7 +1,6 @@
-version: '3.9'
+version: "3.9"
 
 services:
-
   mariadb-master:
     image: mariadb:lts
     volumes:
@@ -14,8 +13,8 @@ services:
     ports:
       - 3301:3301
     networks:
-      - mariadb-network
+      - mysql-network
 
 networks:
-  mariadb-network:
+  mysql-network:
     external: true
