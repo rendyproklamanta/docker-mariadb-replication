@@ -41,7 +41,7 @@ ufw allow 8989
 
 - Create network
 ```
-docker network create --driver overlay mariadb-network
+docker network create --driver overlay mysql-network
 ```
 
 - Set permission if using linux
