@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   mariadb-master:
-    image: mariadb:lts-jammy
+    image: mariadb:10.11
     volumes:
       - ./data/master:/var/lib/mysql
       - ./conf/master.cnf:/etc/mysql/conf.d/mysql.cnf
