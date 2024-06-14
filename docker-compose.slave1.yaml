@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   mariadb-slave1:
-    image: mariadb:lts
+    image: mariadb:lts-jammy
     volumes:
       - ./data/slave1:/var/lib/mysql
       - ./conf/slave1.cnf:/etc/mysql/conf.d/mysql.cnf
