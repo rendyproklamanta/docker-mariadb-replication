@@ -67,14 +67,9 @@ On Windows OR non docker-swarm
 ./start.non-swarm.sh
 ```
 
-- Enable auto start on reboot and re-sync mariadb
+- Check service status after reboot :
 
 ```shell
-> Enable startup service :
-cp mariadb-repl.service /etc/systemd/system/mariadb-repl.service
-sudo systemctl enable mariadb-repl.service
-
-> Check status after reboot :
 sudo journalctl -u mariadb-repl.service
 ```
 

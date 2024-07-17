@@ -34,3 +34,11 @@ docker stack deploy --compose-file docker-compose.backup.yaml --detach=false mar
 
 # Set permission
 chmod -R 777 data
+
+# Enable startup service
+echo 'Set auto startup mariadb service...'
+cp mariadb-repl.service /etc/systemd/system/mariadb-repl.service
+sudo systemctl enable mariadb-repl.service
+
+# Check status after reboot
+sudo journalctl -u mariadb-repl.service
