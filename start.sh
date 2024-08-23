@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Create network
+docker network create --driver overlay mysql-network
+
 # load env file into the script's environment.
 source env.sh
 
