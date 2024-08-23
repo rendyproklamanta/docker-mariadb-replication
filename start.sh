@@ -19,6 +19,11 @@ cd replication/slave1
 chmod +x slave1.start.sh && ./slave1.start.sh
 cd ../../
 
+# Resync nodes
+cd resync
+chmod +x main.sh && ./main.sh
+cd ../
+
 # Deploy backup
 cd backup
 chmod +x backup.start.sh && ./backup.start.sh
