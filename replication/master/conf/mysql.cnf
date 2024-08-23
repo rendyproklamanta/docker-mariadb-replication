@@ -8,6 +8,7 @@ bind-address      = 0.0.0.0
 server-id         = 1
 port              = 3301
 log_bin           = mysql-bin
+binlog_format     = row
 
 # You can add other configs below
 character-set-server    = utf8mb4
