@@ -1,8 +1,8 @@
-version: "3.9"
+version: "3.8"
 
 services:
-  pma:
-    image: phpmyadmin/phpmyadmin
+  maxscale:
+    image: mariadb/maxscale:latest
     deploy:
       replicas: 1
       update_config:
@@ -15,20 +15,16 @@ services:
         max_attempts: 2
       resources:
         limits:
-          cpus: "0.5"
+          cpus: "1.0"
           memory: "512M"
         reservations:
-          cpus: "0.2"
+          cpus: "0.5"
           memory: "256M"
+    volumes:
+      - ./conf/maxscale.cnf:/etc/maxscale.cnf
     ports:
-      - 8000:80
-    environment:
-      - TZ=Asia/Jakarta
-      - PMA_HOST=mariadb_maxscale
-      - PMA_PORT=6033
-      - UPLOAD_LIMIT=2G
-      - MEMORY_LIMIT=500M
-      - MAX_EXECUTION_TIME=1000
+      - 6033:6033
+      - 8989:8989
     networks:
       - mysql-network
 

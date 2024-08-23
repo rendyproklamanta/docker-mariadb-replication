@@ -1,1 +1,5 @@
-/data
+# Ignore data dir
+
+/backup/data
+/replication/master/data
+/replication/slave1/data

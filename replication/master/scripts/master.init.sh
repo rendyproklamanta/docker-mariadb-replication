@@ -12,12 +12,10 @@ docker exec $(docker ps -q -f name=$HOST_MASTER) \
 		--execute="SET GLOBAL time_zone = '$TIMEZONE';\
 
 		CREATE USER IF NOT EXISTS '$REPL_USERNAME'@'%' identified by '$REPL_PASSWORD';\
-		grant replication slave on *.* to '$REPL_USERNAME'@'%';\
+		GRANT REPLICATION SLAVE ON *.* TO '$REPL_USERNAME'@'%';\
 
 		FLUSH PRIVILEGES;"
 
 echo
 echo ===[ $HOST_MASTER is running on port $PORT_MASTER ]===
 echo
-
-chmod +x user/user.master.sh && ./user/user.master.sh

@@ -35,9 +35,14 @@ servers           = server1,server2
 user              = maxuser
 password          = maxpwd
 monitor_interval  = 2000ms
-auto_failover     = true
-auto_rejoin       = true
 enforce_read_only_slaves = 1
+auto_failover     = 1
+failover_timeout  = 2000ms
+auto_rejoin       = true
+failcount         = 5
+master_failure_timeout  = 2000ms
+verify_master_failure   = true
+switchover_timeout      = 2000ms
 
 
 #########################

@@ -5,11 +5,9 @@ default_authentication_plugin    = mysql_native_password
 log_bin_trust_function_creators  = 1
 sql-mode          = 
 bind-address      = 0.0.0.0
-server-id         = 1
-port              = 3301
-binlog_format     = mixed
-log_bin           = master-bin
-log_slave_updates = on
+server-id         = 2
+port              = 3302
+log_bin           = mysql-bin
 
 # You can add other configs below
 character-set-server    = utf8mb4

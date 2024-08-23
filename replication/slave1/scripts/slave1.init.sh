@@ -42,5 +42,3 @@ docker exec $(docker ps -q -f name=$HOST_SLAVE1) \
 echo
 echo ===[ $HOST_SLAVE1 is running on port $PORT_SLAVE1 ]===
 echo
-
-chmod +x user/user.slave1.sh && ./user/user.slave1.sh

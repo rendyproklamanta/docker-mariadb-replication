@@ -1,8 +1,8 @@
 version: "3.9"
 
 services:
-  pma:
-    image: phpmyadmin/phpmyadmin
+  mariadb-slave1:
+    image: mariadb:10
     deploy:
       replicas: 1
       update_config:
@@ -15,20 +15,20 @@ services:
         max_attempts: 2
       resources:
         limits:
+          cpus: "1.0"
+          memory: "1G"
+        reservations:
           cpus: "0.5"
           memory: "512M"
-        reservations:
-          cpus: "0.2"
-          memory: "256M"
-    ports:
-      - 8000:80
+    command: bash -c "chmod 644 /etc/mysql/conf.d/mysql.cnf && docker-entrypoint.sh mysqld"
     environment:
-      - TZ=Asia/Jakarta
-      - PMA_HOST=mariadb_maxscale
-      - PMA_PORT=6033
-      - UPLOAD_LIMIT=2G
-      - MEMORY_LIMIT=500M
-      - MAX_EXECUTION_TIME=1000
+      - TZ=Asia/jakarta
+      - MYSQL_ROOT_PASSWORD=${SLAVE1_ROOT_PASSWORD}
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./conf/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+    ports:
+      - 3302:3302
     networks:
       - mysql-network
 
