@@ -17,9 +17,6 @@ services:
         limits:
           cpus: "1.0"
           memory: "1G"
-        reservations:
-          cpus: "0.5"
-          memory: "512M"
     command: bash -c "chmod 644 /etc/mysql/conf.d/mysql.cnf && docker-entrypoint.sh mysqld"
     environment:
       - TZ=Asia/jakarta
