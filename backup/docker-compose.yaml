@@ -13,13 +13,6 @@ services:
         delay: 5s
         window: 120s
         max_attempts: 2
-      resources:
-        limits:
-          cpus: "1.0"
-          memory: "512M"
-        reservations:
-          cpus: "0.5"
-          memory: "256M"
     environment:
       - TZ=Asia/Jakarta
       - MYSQL_PORT=6033

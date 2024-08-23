@@ -19,13 +19,13 @@ cd replication/slave1
 chmod +x slave1.start.sh && ./slave1.start.sh
 cd ../../
 
-# Deploy MaxScale
-cd maxscale
-docker stack deploy --compose-file docker-compose.yaml --detach=false mariadb
-cd ../
-
 # Deploy backup
 cd backup
+chmod +x backup.start.sh && ./backup.start.sh
+cd ../
+
+# Deploy MaxScale
+cd maxscale
 docker stack deploy --compose-file docker-compose.yaml --detach=false mariadb
 cd ../
 

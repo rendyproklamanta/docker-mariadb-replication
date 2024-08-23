@@ -45,12 +45,6 @@ ufw allow 3302
 ufw allow 8989
 ```
 
-- Create network
-
-```shell
-docker network create --driver overlay mysql-network
-```
-
 - Set permission if using linux
 
 ```shell
@@ -63,8 +57,8 @@ chmod +x start.sh
 On Linux
 ./start.sh
 
-On Windows OR non docker-swarm
-./start.non-swarm.sh
+On Windows OR non dev
+./start.dev.sh
 ```
 
 - Check service status after reboot :
@@ -107,7 +101,7 @@ pass : mariadb
 ```shell
 * Execute start.sh again : 
 -- linux : ./start.sh
--- windows : ./start-non-swarm.sh
+-- windows : ./start.dev.sh
 
 * Check if 1 or more database not sync beetwen servers :
 -- Login to mysqlclient : maxscale server
