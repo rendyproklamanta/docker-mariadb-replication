@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   mariadb-master:
-    image: mariadb:10
+    image: mariadb:11
     deploy:
       replicas: 1
       update_config:
@@ -17,13 +17,13 @@ services:
         limits:
           cpus: "1.0"
           memory: "1G"
-    command: bash -c "chmod 644 /etc/mysql/conf.d/mysql.cnf && docker-entrypoint.sh mysqld"
     environment:
-      - TZ=Asia/jakarta
-      - MYSQL_ROOT_PASSWORD=${MASTER_ROOT_PASSWORD}
+      - TZ=$TIMEZONE
+      - MYSQL_ROOT_PASSWORD=$MASTER_ROOT_PASSWORD
     volumes:
       - ./data:/var/lib/mysql
-      - ./conf/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+      - ./conf/mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro
+      - ./init:/docker-entrypoint-initdb.d
     ports:
       - 3301:3301
     networks:

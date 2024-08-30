@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # load env file into the script's environment.
-source ../env.sh
-source ../replication/master/scripts/master.env.sh
-source ../replication/slave1/scripts/slave1.env.sh
+source ../env/global.sh
+source ../env/master.sh
+source ../env/slave1.sh
 
 echo
 echo ===[ Starting to resync master ]===
