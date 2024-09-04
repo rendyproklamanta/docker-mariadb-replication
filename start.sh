@@ -12,11 +12,13 @@ docker stack rm mariadb
 cd replication
 
 # Deploy master
+echo '*** Deploy container master ***'
 cd master
 chmod +x init.sh && ./init.sh
 cd ../
 
 # Deploy slave1
+echo '*** Deploy container slave1 ***'
 cd slave1
 chmod +x init.sh && ./init.sh
 cd ../
@@ -49,10 +51,11 @@ cd ../
 # Deploy PMA
 echo '*** Deploy PMA container ***'
 cd pma
-docker stack deploy --compose-file docker-compose.pma.yaml --detach=false mariadb
+docker stack deploy --compose-file docker-compose.yaml --detach=false mariadb
 cd ../
 
 # Enable startup service
+cd ../
 echo '*** Set auto startup mariadb service ***'
 cp mariadb-repl.service /etc/systemd/system/mariadb-repl.service
 sudo systemctl enable mariadb-repl.service
