@@ -61,5 +61,5 @@ cp mariadb-repl.service /etc/systemd/system/mariadb-repl.service
 sudo systemctl enable mariadb-repl.service
 
 # Check status after reboot
-echo '*** Check mariadb service ***'
-sudo journalctl -u mariadb-repl.service
+# echo '*** Check mariadb service ***'
+# sudo journalctl -u mariadb-repl.service
