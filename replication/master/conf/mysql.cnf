@@ -10,6 +10,8 @@ server-id         = 1
 port              = 3301
 log_bin           = mysql-bin
 binlog_format     = row
+max_binlog_size   = 100M
+expire_logs_days  = 5
 
 # -- You can add other configs below --
 character-set-server    = utf8mb4
