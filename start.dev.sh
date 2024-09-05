@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Define color codes
-RED='\033[0;31m'
-NC='\033[0m' # No Color (reset to default)
-
 # load env file into the script's environment.
 source ./env/global.sh
 source ./env/master.sh
@@ -17,11 +13,13 @@ docker network create --driver overlay mysql-network
 docker stack rm mariadb
 
 # Deploy master
-echo "${RED}*** Deploy container master ***${NC}"
+echo "*** Deploy container master ***"
 cd ./replication/master
 mkdir -p data
 chmod -R 777 data
-chmod +x init/init-sql.sh && init/init-sql.sh
+cd init
+chmod +x init-sql.sh && ./init-sql.sh
+cd ../
 docker stack deploy --compose-file docker-compose.yaml --detach=false mariadb
 echo "[*] Waiting 30s for master container to be up and running..."
 sleep 30
@@ -29,11 +27,13 @@ sleep 30
 cd ../../
 
 # Deploy slave1
-echo "${RED}*** Deploy container slave1 ***${NC}"
+echo "*** Deploy container slave1 ***"
 cd ./replication/slave1
 mkdir -p data
 chmod -R 777 data
-chmod +x init/init-sql.sh && init/init-sql.sh
+cd init
+chmod +x init-sql.sh && ./init-sql.sh
+cd ../
 docker stack deploy --compose-file docker-compose.yaml --detach=false mariadb
 echo "[*] Waiting 30s for slave container to be up and running..."
 sleep 30
@@ -42,7 +42,7 @@ docker exec -i $(docker ps -q -f name=$HOST_SLAVE1) mariadb -uroot -p$SLAVE1_ROO
 cd ../../
 
 # Resync replication
-echo "${RED}*** Resync replication ***${NC}"
+echo "*** Resync replication ***"
 cd resync
 chmod +x main.sh && ./main.sh
 
