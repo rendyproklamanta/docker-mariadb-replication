@@ -17,8 +17,7 @@ echo "*** Deploy container master ***"
 cd ./replication/master
 mkdir -p data
 chmod -R 777 data
-cd init
-chmod +x init-sql.sh && ./init-sql.sh
+cd init && chmod +x init-sql.sh && ./init-sql.sh
 cd ../
 docker stack deploy --compose-file docker-compose.yaml --detach=false mariadb
 echo "[*] Waiting 30s for master container to be up and running..."
@@ -31,8 +30,7 @@ echo "*** Deploy container slave1 ***"
 cd ./replication/slave1
 mkdir -p data
 chmod -R 777 data
-cd init
-chmod +x init-sql.sh && ./init-sql.sh
+cd init && chmod +x init-sql.sh && ./init-sql.sh
 cd ../
 docker stack deploy --compose-file docker-compose.yaml --detach=false mariadb
 echo "[*] Waiting 30s for slave container to be up and running..."
@@ -43,10 +41,9 @@ cd ../../
 
 # Resync replication
 echo "*** Resync replication ***"
-cd resync
-chmod +x main.sh && ./main.sh
+cd resync && chmod +x main.sh && ./main.sh
 
-cd ../
+cd ../../
 
 # --------------------------
 
@@ -60,7 +57,7 @@ cd ../
 
 # Deploy backup
 cd backup
-docker stack deploy --compose-file docker-compose.yaml --detach=false mariadb
+chmod +x init.sh && ./init.sh
 cd ../
 
 # Deploy PMA
