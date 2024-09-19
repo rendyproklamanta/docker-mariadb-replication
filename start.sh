@@ -22,22 +22,22 @@ docker stack rm mariadb
 
 # Deploy master
 echo -e "${YELLOW}**** Deploy container master ****${NC}"
-mkdir -p $BASE_DIR/replication/master/data
-chmod -R 777 $BASE_DIR/replication/master/data
-cd $BASE_DIR/replication/master/init && chmod +x init-sql.sh && ./init-sql.sh
-docker stack deploy --compose-file $BASE_DIR/replication/master/docker-compose.yaml --detach=false mariadb
+mkdir -p $BASE_DIR/nodes/master/data
+chmod -R 777 $BASE_DIR/nodes/master/data
+cd $BASE_DIR/nodes/master/init && chmod +x init-sql.sh && ./init-sql.sh
+docker stack deploy --compose-file $BASE_DIR/nodes/master/docker-compose.yaml --detach=false mariadb
 echo "[*] Waiting 30s for master container to be up and running..."
 sleep 30
 
 # Deploy slave1
 echo -e "${YELLOW}**** Deploy container slave1 ****${NC}"
-mkdir -p $BASE_DIR/replication/slave1/data
-chmod -R 777 $BASE_DIR/replication/slave1/data
-cd $BASE_DIR/replication/slave1/init && chmod +x init-sql.sh && ./init-sql.sh
-docker stack deploy --compose-file $BASE_DIR/replication/slave1/docker-compose.yaml --detach=false mariadb
+mkdir -p $BASE_DIR/nodes/slave1/data
+chmod -R 777 $BASE_DIR/nodes/slave1/data
+cd $BASE_DIR/nodes/slave1/init && chmod +x init-sql.sh && ./init-sql.sh
+docker stack deploy --compose-file $BASE_DIR/nodes/slave1/docker-compose.yaml --detach=false mariadb
 echo "[*] Waiting 30s for slave container to be up and running..."
 sleep 30
-docker exec -i $(docker ps -q -f name=$HOST_SLAVE1) mariadb -uroot -p$SLAVE1_ROOT_PASSWORD < $BASE_DIR/replication/slave1/init/01-init.sql
+docker exec -i $(docker ps -q -f name=$HOST_SLAVE1) mariadb -uroot -p$SLAVE1_ROOT_PASSWORD < $BASE_DIR/nodes/slave1/init/01-init.sql
 
 # Resync replication
 echo -e "${YELLOW}**** Resync replication ****${NC}"

@@ -14,7 +14,7 @@ docker stack rm mariadb
 
 # Deploy master
 echo "*** Deploy container master ***"
-cd ./replication/master
+cd ./nodes/master
 mkdir -p data
 chmod -R 777 data
 cd init && chmod +x init-sql.sh && ./init-sql.sh
@@ -27,7 +27,7 @@ cd ../../
 
 # Deploy slave1
 echo "*** Deploy container slave1 ***"
-cd ./replication/slave1
+cd ./nodes/slave1
 mkdir -p data
 chmod -R 777 data
 cd init && chmod +x init-sql.sh && ./init-sql.sh

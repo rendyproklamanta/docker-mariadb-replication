@@ -1,7 +1,7 @@
 # Ignore data dir
 services/backup/data
-replication/*/data
+nodes/*/data
 
-replication/*/init/*
-!replication/*/init/init-sql.sh
+nodes/*/init/*
+!nodes/*/init/init-sql.sh
 
