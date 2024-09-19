@@ -1,10 +1,16 @@
 #!/bin/bash
 
+# Create initdb directory if it doesn't exist
+mkdir -p initdb
+
+# Get the container ID for the master
+container_id=$(docker ps -q -f name=$HOST_MASTER)
+
 # Fetch master status
-result=$(docker exec $(docker ps -q -f name=$HOST_MASTER) \
+result=$(docker exec $container_id \
   mariadb -uroot --password=$MASTER_ROOT_PASSWORD --port=$PORT_MASTER \
   --execute="SHOW MASTER STATUS\G")
-
+  
 # Extract the log file and position
 log=$(echo "$result" | grep 'File:' | awk '{print $2}')
 position=$(echo "$result" | grep 'Position:' | awk '{print $2}')
@@ -16,7 +22,7 @@ if [ -z "$log" ] || [ -z "$position" ]; then
 fi
 
 # Generate the init.sql file
-cat <<EOF > 01-init.sql
+cat <<EOF > initdb/01-init.sql
 -- Set the global time zone
 SET GLOBAL time_zone = '$TIMEZONE';
 
@@ -50,7 +56,7 @@ EOF
 echo "01-init.sql file generated successfully."
 
 # Generate the init.sql file
-cat <<EOF > 02-init.sql
+cat <<EOF > initdb/02-init.sql
 -- Create user for monitor maxscale
 CREATE USER IF NOT EXISTS '$MAXSCALE_USERNAME'@'%' IDENTIFIED BY '$MAXSCALE_PASSWORD';
 GRANT ALL PRIVILEGES ON *.* TO '$MAXSCALE_USERNAME'@'%' WITH GRANT OPTION;
@@ -63,6 +69,3 @@ FLUSH PRIVILEGES;
 EOF
 
 echo "02-init.sql file generated successfully."
-
-## Combined all init.sql
-# cat *.sql > combined-init.sql

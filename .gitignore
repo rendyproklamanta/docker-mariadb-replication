@@ -1,7 +1,4 @@
-# Ignore data dir
-services/backup/data
+# Ignore dir
 nodes/*/data
-
-nodes/*/init/*
-!nodes/*/init/init-sql.sh
-
+nodes/*/initdb
+services/*/data

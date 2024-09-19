@@ -1,7 +1,10 @@
 #!/bin/bash
 
+# Create initdb directory if it doesn't exist
+mkdir -p initdb
+
 # Generate the init.sql file
-cat <<EOF > 01-init.sql
+cat <<EOF > initdb/01-init.sql
 -- Set the global time zone
 SET GLOBAL time_zone = '$TIMEZONE';
 
@@ -18,7 +21,7 @@ EOF
 echo "01-init.sql file generated successfully."
 
 # Generate the init.sql file
-cat <<EOF > 02-init.sql
+cat <<EOF > initdb/02-init.sql
 -- Create user for monitor maxscale
 CREATE USER IF NOT EXISTS '$MAXSCALE_USERNAME'@'%' IDENTIFIED BY '$MAXSCALE_PASSWORD';
 GRANT ALL PRIVILEGES ON *.* TO '$MAXSCALE_USERNAME'@'%' WITH GRANT OPTION;

@@ -13,41 +13,37 @@ docker network create --driver overlay mysql-network
 docker stack rm mariadb
 
 # Deploy master
-echo "*** Deploy container master ***"
+echo "**** Deploy container master ****"
 cd ./nodes/master
 mkdir -p data
 chmod -R 777 data
-cd init && chmod +x init-sql.sh && ./init-sql.sh
-cd ../
+chmod +x init-sql.sh && ./init-sql.sh
 docker stack deploy --compose-file docker-compose.yaml --detach=false mariadb
-echo "[*] Waiting 30s for master container to be up and running..."
-sleep 30
 
 cd ../../
 
 # Deploy slave1
-echo "*** Deploy container slave1 ***"
+echo "**** Deploy container slave1 ****"
 cd ./nodes/slave1
 mkdir -p data
 chmod -R 777 data
-cd init && chmod +x init-sql.sh && ./init-sql.sh
-cd ../
+chmod +x check-master.sh && ./check-master.sh
+chmod +x init-sql.sh && ./init-sql.sh
 docker stack deploy --compose-file docker-compose.yaml --detach=false mariadb
-echo "[*] Waiting 30s for slave container to be up and running..."
-sleep 30
-docker exec -i $(docker ps -q -f name=$HOST_SLAVE1) mariadb -uroot -p$SLAVE1_ROOT_PASSWORD < init/01-init.sql
+chmod +x check-slave1.sh && ./check-slave1.sh
+docker exec -i $(docker ps -q -f name=$HOST_SLAVE1) mariadb -uroot -p$SLAVE1_ROOT_PASSWORD < initdb/01-init.sql
 
 cd ../../
 
 # Resync replication
-echo "*** Resync replication ***"
+echo "**** Resync replication ****"
 cd resync && chmod +x main.sh && ./main.sh
 
-cd ../../
+cd ../
 
 # --------------------------
 
-echo '*** Deploy services ***'
+echo '**** Deploy services ****'
 cd services
 
 # Deploy MaxScale
