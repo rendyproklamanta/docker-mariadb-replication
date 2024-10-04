@@ -1,5 +1,9 @@
 #!/bin/bash
 
+echo
+echo ===[ Starting to resync slave1 ]===
+echo
+
 # Get the log position and name from master
 result=$(docker exec $(docker ps -q -f name=$HOST_MASTER) mariadb -u root --password=$MASTER_ROOT_PASSWORD --port=$PORT_MASTER --execute="show master status;")
 log=$(echo $result|awk '{print $6}')
