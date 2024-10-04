@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Create user1
+docker build -t mysql-user-rolling .
 docker stack deploy --compose-file docker-compose.user1.yaml --detach=false mariadb-user1
 
 # # Create user2

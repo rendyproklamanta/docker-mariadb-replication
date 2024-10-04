@@ -8,6 +8,7 @@ services:
       - SUPER_PASSWORD_FILE=/run/secrets/db_super_paswd # use docker secret to protect sensitive information
       - SUPER_USER=super_usr
       - DB_HOST=mariadb_maxscale
+      - DB_PORT=6033
       - DB_USER=project2_usr
       - DB_PREFIX=dbname # give all access to db with prefix dbname_
       - PMA_URL=http://192.168.1.0:8000
@@ -15,6 +16,7 @@ services:
       - GITLAB_TOKEN=your_personal_access_token
       - GITLAB_PROJECT_ID=your_project_id
       - GITLAB_API_URL=https://repo.cic-webpro.com
+      - GITLAB_SNIPPET_TITLE=Database Credential
     deploy:
       replicas: 1
       update_config:
