@@ -21,7 +21,7 @@ services:
       - TZ=$TIMEZONE
       - MYSQL_ROOT_PASSWORD=$MASTER_ROOT_PASSWORD
     volumes:
-      - ./data:/var/lib/mysql
+      - /data/mariadb/master:/var/lib/mysql
       - ./conf/mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro
       - ./initdb:/docker-entrypoint-initdb.d
     ports:

@@ -20,18 +20,24 @@ docker stack rm mariadb
 
 # ---------------------------
 
+# Create docker secrets
+echo -e "${YELLOW}**** Create docker secrets ****${NC}"
+cd $BASE_DIR && chmod +x secrets.sh && ./secrets.sh
+
+# Create directory data
+mkdir -p /data/mariadb
+sudo chown -R root:mysql /data/mariadb
+
 # Deploy master
 echo -e "${YELLOW}**** Deploy container master ****${NC}"
-mkdir -p $BASE_DIR/nodes/master/data
-chmod -R 777 $BASE_DIR/nodes/master/data
+mkdir -p /data/mariadb/master
 cd $BASE_DIR/nodes/master && chmod +x init.sql.sh && ./init.sql.sh
 docker stack deploy --compose-file $BASE_DIR/nodes/master/docker-compose.yaml --detach=false mariadb
 cd $BASE_DIR/nodes/master && chmod +x healthcheck.sh && ./healthcheck.sh
 
 # Deploy slave1
 echo -e "${YELLOW}**** Deploy container slave1 ****${NC}"
-mkdir -p $BASE_DIR/nodes/slave1/data
-chmod -R 777 $BASE_DIR/nodes/slave1/data
+mkdir -p /data/mariadb/slave1
 cd $BASE_DIR/nodes/slave1 && chmod +x init.sql.sh && ./init.sql.sh
 docker stack deploy --compose-file $BASE_DIR/nodes/slave1/docker-compose.yaml --detach=false mariadb
 cd $BASE_DIR/nodes/slave1 && chmod +x healthcheck.sh && ./healthcheck.sh
@@ -62,10 +68,6 @@ docker stack deploy --compose-file $BASE_DIR/services/pma/docker-compose.yaml --
 echo -e "${YELLOW}**** Set auto startup mariadb service ****${NC}"
 cp $BASE_DIR/mariadb-repl.service /etc/systemd/system/mariadb-repl.service
 sudo systemctl enable mariadb-repl.service
-
-# Create docker secrets
-echo -e "${YELLOW}**** Create docker secrets ****${NC}"
-cd $BASE_DIR && chmod +x secrets.sh && ./secrets.sh
 
 # Check status after reboot
 # echo '**** Check mariadb service ****'

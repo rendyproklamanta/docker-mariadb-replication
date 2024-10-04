@@ -2,6 +2,7 @@
 
 # Variables
 SUPER_PASSWORD=$(cat "$SUPER_PASSWORD_FILE")
+SUPER_USER=$(cat "$SUPER_USER_FILE")
 PASSWORD=$(openssl rand -base64 12)  # Generate a random password
 GITLAB_API_URL="${GITLAB_API_URL}/api/v4/projects/$GITLAB_PROJECT_ID/snippets"
 
@@ -36,6 +37,7 @@ fi
 curl --request POST "$GITLAB_API_URL" \
   --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
   --form "title=$GITLAB_SNIPPET_TITLE" \
+  --form "file_name=$GITLAB_SNIPPET_TITLE" \
   --form "content=$CONTENT" \
   --form "visibility=private" \
 
