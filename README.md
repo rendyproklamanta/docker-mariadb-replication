@@ -68,11 +68,12 @@ On Windows OR non dev
 sudo journalctl -u mariadb-repl.service
 ```
 
-## Create and Rolling user password for secure sensitive
+## Rolling user password
 
 ```shell
 cd services/credential-rolling
 cd users
+nano docker-compose.userxx.yaml
 chmod +x init.sh && ./init.sh
 ```
 
