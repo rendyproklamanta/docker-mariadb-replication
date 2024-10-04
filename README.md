@@ -16,20 +16,20 @@
 - Create dir
   
 ```shell
-mkdir -p /var/lib/mysql
+mkdir -p /var/lib/mariadb
 ```
 
 - goto dir and clone
 
 ```shell
-cd /var/lib/mysql
+cd /var/lib/mariadb
 git clone https://github.com/rendyproklamanta/docker-mariadb-replication.git .
 ```
 
 - Change Password by using text replacing tool
 
 ```shell
-cd /var/lib/mysql
+cd /var/lib/mariadb
 find -type f -exec sed -i 's/REPL_PASSWORD_SET/YOUR_PASSWORD/g' {} +
 find -type f -exec sed -i 's/MASTER_ROOT_PASSWORD_SET/YOUR_PASSWORD/g' {} +
 find -type f -exec sed -i 's/SLAVE1_ROOT_PASSWORD_SET/YOUR_PASSWORD/g' {} +

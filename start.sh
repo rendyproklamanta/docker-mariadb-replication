@@ -5,7 +5,7 @@ YELLOW='\033[0;33m'
 NC='\033[0m' # No Color (reset to default)
 
 # Define the absolute path to the script directory
-BASE_DIR="/var/lib/mysql"
+BASE_DIR="/var/lib/mariadb"
 
 # load env file into the script's environment.
 source $BASE_DIR/env/global.sh
