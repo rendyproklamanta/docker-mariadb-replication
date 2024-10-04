@@ -23,7 +23,7 @@ services:
       - INIT_BACKUP=0
       - CRON_TIME=0 */6 * * *
     volumes:
-      - ./backup/mysql:/backup
+      - ./backup/mariadb:/backup
     networks:
       - mysql-network
 
