@@ -68,6 +68,14 @@ On Windows OR non dev
 sudo journalctl -u mariadb-repl.service
 ```
 
+## Create and Rolling user password for secure sensitive
+
+```shell
+cd services/credential-rolling
+cd users
+chmod +x init.sh && ./init.sh
+```
+
 ## Access
 
 - Access database using PMA

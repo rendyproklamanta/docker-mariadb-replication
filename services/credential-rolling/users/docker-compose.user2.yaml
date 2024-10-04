@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  mysql-user2:
+    build: .
+    environment:
+      #- SUPER_PASSWORD_FILE=my_password
+      - SUPER_PASSWORD_FILE=/run/secrets/db_super_paswd # use docker secret to protect sensitive information
+      - SUPER_USER=super_usr
+      - DB_HOST=mariadb_maxscale
+      - DB_USER=project2_usr
+      - DB_PREFIX=dbname # give all access to db with prefix dbname_
+      - PMA_URL=http://192.168.1.0:8000
+      - IP_ADDRESS=192.168.1.0
+      - GITLAB_TOKEN=your_personal_access_token
+      - GITLAB_PROJECT_ID=your_project_id
+      - GITLAB_API_URL=https://repo.cic-webpro.com
+    deploy:
+      replicas: 1
+      update_config:
+        order: start-first
+        delay: 1s
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        window: 120s
+        max_attempts: 2
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "512M"
+    secrets:
+      - db_super_paswd
+    networks:
+      - mysql-network
+
+secrets:
+  db_super_paswd:
+    external: true
+
+networks:
+  mysql-network:
+    external: true

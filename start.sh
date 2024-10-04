@@ -62,6 +62,10 @@ echo -e "${YELLOW}**** Set auto startup mariadb service ****${NC}"
 cp $BASE_DIR/mariadb-repl.service /etc/systemd/system/mariadb-repl.service
 sudo systemctl enable mariadb-repl.service
 
+# Create docker secrets
+echo -e "${YELLOW}**** Create docker secrets ****${NC}"
+cd $BASE_DIR && chmod +x secrets.sh && ./secrets.sh
+
 # Check status after reboot
 # echo '**** Check mariadb service ****'
 # sudo journalctl -u mariadb-repl.service
