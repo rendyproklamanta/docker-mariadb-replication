@@ -19,8 +19,8 @@ services:
       - 6033:6033
       - 8989:8989
     networks:
-      - mysql-network
+      - mariadb-network
 
 networks:
-  mysql-network:
+  mariadb-network:
     external: true

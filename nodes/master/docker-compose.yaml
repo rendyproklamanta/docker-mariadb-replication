@@ -27,8 +27,8 @@ services:
     ports:
       - 3301:3301
     networks:
-      - mysql-network
+      - mariadb-network
 
 networks:
-  mysql-network:
+  mariadb-network:
     external: true

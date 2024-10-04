@@ -32,12 +32,12 @@ services:
     secrets:
       - db_super_paswd
     networks:
-      - mysql-network
+      - mariadb-network
 
 secrets:
   db_super_paswd:
     external: true
 
 networks:
-  mysql-network:
+  mariadb-network:
     external: true

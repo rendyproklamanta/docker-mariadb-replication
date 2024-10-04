@@ -7,7 +7,7 @@ source ./env/slave1.sh
 
 # Init swarm
 docker swarm init
-docker network create --driver overlay mysql-network
+docker network create --driver overlay mariadb-network
 
 # Stopping all services
 docker stack rm mariadb

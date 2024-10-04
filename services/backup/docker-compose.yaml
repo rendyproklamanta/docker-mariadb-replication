@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-  mysql-cron-backup:
+  mariadb-cron-backup:
     image: fradelg/mysql-cron-backup
     deploy:
       replicas: 1
@@ -23,10 +23,10 @@ services:
       - INIT_BACKUP=0
       - CRON_TIME=0 */6 * * *
     volumes:
-      - ./backup/mariadb:/backup
+      - /backup/mariadb:/backup
     networks:
-      - mysql-network
+      - mariadb-network
 
 networks:
-  mysql-network:
+  mariadb-network:
     external: true

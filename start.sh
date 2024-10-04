@@ -13,7 +13,7 @@ source $BASE_DIR/env/master.sh
 source $BASE_DIR/env/slave1.sh
 
 # Create network
-docker network create --driver overlay mysql-network
+docker network create --driver overlay mariadb-network
 
 # Stopping all services
 docker stack rm mariadb
