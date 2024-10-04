@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Deploy backup
-mkdir -p data
-chmod -R 777 data
+mkdir -p /backup/mariadb
+chmod -R 777 /backup/mariadb
 
 docker stack deploy --compose-file docker-compose.yaml --detach=false mariadb
