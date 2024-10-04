@@ -25,6 +25,7 @@ echo -e "${YELLOW}**** Create docker secrets ****${NC}"
 cd $BASE_DIR && chmod +x secrets.sh && ./secrets.sh
 
 # Create directory data
+sudo groupadd mysql
 mkdir -p /data/mariadb
 sudo chown -R root:mysql /data/mariadb
 
