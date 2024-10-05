@@ -17,14 +17,14 @@ services:
       - db_super_user
       - db_super_paswd
     environment:
-      - TZ=Asia/Jakarta
-      - MYSQL_PORT=6033
-      - MYSQL_HOST=mariadb_maxscale
-      - MYSQL_USER_FILE=/run/secrets/db_super_user
-      - MYSQL_PASS_FILE=/run/secrets/db_super_paswd
-      - MAX_BACKUPS=4
-      - INIT_BACKUP=0
-      - CRON_TIME=0 */6 * * *
+      TZ: "Asia/Jakarta"
+      MYSQL_PORT: "6033"
+      MYSQL_HOST: "mariadb_maxscale"
+      MYSQL_USER_FILE: "/run/secrets/db_super_user"
+      MYSQL_PASS_FILE: "/run/secrets/db_super_paswd"
+      MAX_BACKUPS: "4"
+      INIT_BACKUP: "0"
+      CRON_TIME: "0 */6 * * *"
     volumes:
       - /backup/mariadb:/backup
     networks:
