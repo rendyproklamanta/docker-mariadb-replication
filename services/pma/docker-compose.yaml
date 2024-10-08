@@ -53,7 +53,7 @@ services:
 
         # Middleware basicauth
         - "traefik.http.routers.phpmyadmin.middlewares=pma-auth"
-        - "traefik.http.middlewares.pma-auth.basicauth.users=qidnzieirl:$$2y$$05$$hoC5xYfnFpvAVn3pvGPKeuCfuLQaRUnnBRwKz.vgy1lhF2MdUThim" # random_user:undercover
+        - "traefik.http.middlewares.pma-auth.basicauth.users=pma_user:generated_password"
     networks:
       - mariadb-network
       - traefik-network
