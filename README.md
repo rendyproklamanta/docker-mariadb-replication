@@ -1,5 +1,9 @@
 # MariaDB replication using MaxScale
 
+- If you want more secure, you can use SSL connect Client to Server
+
+<https://github.com/rendyproklamanta/docker-mariadb-replication-ssl>
+
 ## Stacks
 
 - MariaDB 10.x
@@ -70,12 +74,7 @@ sudo journalctl -u mariadb-repl.service
 
 ## Rolling user password
 
-```shell
-cd services/credential-rolling
-cd users
-nano docker-compose.userxx.yaml
-chmod +x init.sh && ./init.sh
-```
+<https://github.com/rendyproklamanta/docker-mysql-credential-rolling>
 
 ## Access
 
