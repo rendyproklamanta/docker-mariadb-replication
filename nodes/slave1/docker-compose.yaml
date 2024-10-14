@@ -17,11 +17,9 @@ services:
         limits:
           cpus: "0.5"
           memory: "512M"
-    secrets:
-      - db_slave1_paswd
     environment:
       TZ: $TIMEZONE
-      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_slave1_paswd
+      MYSQL_ROOT_PASSWORD: SLAVE1_ROOT_PASSWORD
     volumes:
       - /data/mariadb/slave1:/var/lib/mysql
       - ./conf/mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro
@@ -30,10 +28,6 @@ services:
       - 3302:3302
     networks:
       - mariadb-network
-
-secrets:
-  db_slave1_paswd:
-    external: true
 
 networks:
   mariadb-network:
