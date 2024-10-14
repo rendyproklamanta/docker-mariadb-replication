@@ -24,9 +24,9 @@ services:
       MYSQL_PASS_FILE: "/run/secrets/db_super_paswd"
       MAX_BACKUPS: "4"
       INIT_BACKUP: "0"
-      CRON_TIME: "0 */6 * * *"
+      CRON_TIME: "0 */1* * *" ## Run cron every ...
     volumes:
-      - /backup/mariadb:/backup
+      - CHANGE_DIR:/backup
     networks:
       - mariadb-network
 

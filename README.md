@@ -40,6 +40,23 @@ find -type f -exec sed -i 's/SLAVE1_ROOT_PASSWORD_SET/YOUR_PASSWORD/g' {} +
 find -type f -exec sed -i 's/SUPER_PASSWORD_SET/YOUR_PASSWORD/g' {} +
 ```
 
+- Change directory data
+
+```shell
+cd /var/lib/mariadb
+nano start.sh
+nano mariadb-repl.service
+nano /nodes/master/docker-compose.yaml
+nano /nodes/slave1/docker-compose.yaml
+nano /services/backup/docker-compose.yaml
+```
+
+- Change Domain PMA
+
+```shell
+nano /services/pma/docker-compose.yaml
+```
+
 - Adding port to firewall
 
 ```shell
@@ -50,20 +67,10 @@ ufw allow 3302
 ufw allow 8989
 ```
 
-- Set permission if using linux
+- Set permission and Run!!
 
 ```shell
-chmod +x start.sh
-```
-
-- Run script
-
-```shell
-On Linux
-./start.sh
-
-On Windows OR non dev
-./start.dev.sh
+chmod +x start.sh && ./start.sh
 ```
 
 - Check service status after reboot :
