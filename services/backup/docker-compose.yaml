@@ -22,7 +22,7 @@ services:
       MYSQL_HOST: "mariadb_maxscale"
       MYSQL_USER_FILE: "/run/secrets/db_super_user"
       MYSQL_PASS_FILE: "/run/secrets/db_super_paswd"
-      MAX_BACKUPS: "4"
+      MAX_BACKUPS: "6"
       INIT_BACKUP: "0"
       CRON_TIME: "0 */1* * *" ## Run cron every ...
     volumes:
