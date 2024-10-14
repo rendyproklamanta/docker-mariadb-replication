@@ -6,6 +6,8 @@ NC='\033[0m' # No Color (reset to default)
 
 # Define the absolute path to the script directory
 BASE_DIR="/var/lib/mariadb"
+DATA_DIR="/data/mariadb"
+BACKUP_DIR="/backup/mariadb"
 
 # load env file into the script's environment.
 source $BASE_DIR/env/global.sh
@@ -24,21 +26,27 @@ docker stack rm mariadb
 echo -e "${YELLOW}**** Create docker secrets ****${NC}"
 cd $BASE_DIR/env/secrets && chmod +x secrets.sh && ./secrets.sh
 
-# Create directory data
+# Create addgroupmysql
 sudo groupadd mysql
-mkdir -p /data/mariadb
-sudo chown -R root:mysql /data/mariadb
+
+# Create directory data
+mkdir -p $DATA_DIR
+sudo chown -R root:mysql $DATA_DIR
+
+# Create directory backup
+mkdir -p $BACKUP_DIR
+chmod -R 755 $BACKUP_DIR
 
 # Deploy master
 echo -e "${YELLOW}**** Deploy container master ****${NC}"
-mkdir -p /data/mariadb/master
+mkdir -p $DATA_DIR/master
 cd $BASE_DIR/nodes/master && chmod +x init.sql.sh && ./init.sql.sh
 docker stack deploy --compose-file $BASE_DIR/nodes/master/docker-compose.yaml --detach=false mariadb
 cd $BASE_DIR/nodes/master && chmod +x healthcheck.sh && ./healthcheck.sh
 
 # Deploy slave1
 echo -e "${YELLOW}**** Deploy container slave1 ****${NC}"
-mkdir -p /data/mariadb/slave1
+mkdir -p $DATA_DIR/slave1
 cd $BASE_DIR/nodes/slave1 && chmod +x init.sql.sh && ./init.sql.sh
 docker stack deploy --compose-file $BASE_DIR/nodes/slave1/docker-compose.yaml --detach=false mariadb
 cd $BASE_DIR/nodes/slave1 && chmod +x healthcheck.sh && ./healthcheck.sh
@@ -59,7 +67,7 @@ docker stack deploy --compose-file $BASE_DIR/services/maxscale/docker-compose.ya
 
 # Deploy backup
 echo -e "${YELLOW}**** Deploy backup container ****${NC}"
-cd $BASE_DIR/services/backup && chmod +x init.sh && ./init.sh
+docker stack deploy --compose-file $BASE_DIR/services/backup/docker-compose.yaml --detach=false mariadb
 
 # Deploy PMA
 echo -e "${YELLOW}**** Deploy PMA container ****${NC}"
